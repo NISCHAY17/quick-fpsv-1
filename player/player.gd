@@ -31,3 +31,18 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("jump") and velocity.y > 0.0:
 		velocity.y = 0.0
 	move_and_slide()
+	
+	if Input.is_action_pressed('shoot') and %Timer.is_stopped():
+		shoot_bullet()
+	
+func shoot_bullet():
+	const BULLET_3D = preload("res://player/bullet_3d.tscn")
+	
+	var new_bullwt = BULLET_3D.instantiate()
+	
+	%Marker3D.add_child(new_bullwt)
+	
+	new_bullwt.global_transform = %Marker3D.global_transform
+	
+	%Timer.start()
+	#preload("res://player/bullet_3d.tscn")
