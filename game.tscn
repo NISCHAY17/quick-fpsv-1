@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cbgqmgsokexjx" path="res://player/player.tscn" id="1_80nbo"]
 [ext_resource type="Material" uid="uid://bgyhton2mvde4" path="res://level/bridge.tres" id="1_e2o6t"]
 [ext_resource type="Material" uid="uid://bnhrjg5rrywil" path="res://level/platform.tres" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bq7a4lgadbagy" path="res://mob/mob.tscn" id="4_fc0e3"]
 
 [sub_resource type="Environment" id="Environment_80nbo"]
 background_mode = 1
@@ -77,6 +78,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1689239298]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 3, 0)
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1549160175]
 environment = SubResource("Environment_80nbo")
+
+[node name="Mob" parent="." unique_id=1065548461 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 8)
