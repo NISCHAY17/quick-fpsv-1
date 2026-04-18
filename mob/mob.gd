@@ -2,7 +2,7 @@ extends RigidBody3D
 var health = 3
 @onready var bat_model: Node3D = %bat_model
 var speed = randf_range(1.0, 1.7)
-
+signal died
 @onready var player = get_node("/root/Game/Player")
 @onready var timer: Timer = %Timer
 
@@ -29,6 +29,7 @@ func take_damage():
 		var random_upword_force = Vector3.UP * randf_range(1.0, 6.7)
 		apply_central_force(direction * 10.0 * random_upword_force)
 		timer.start()
+		died.emit()
 		lock_rotation = false
 
 func _on_timer_timeout() -> void:
