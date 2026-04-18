@@ -1,15 +1,61 @@
 [gd_scene format=3 uid="uid://cfom8xj528kj5"]
 
 [ext_resource type="PackedScene" uid="uid://dnfgaqd68twtc" path="res://mob/spawner/spawner_model.glb" id="1_t8boo"]
-[ext_resource type="Shader" uid="uid://dkonxptcv4v2d" path="res://mob/spawner/test.gdshader" id="2_l1cud"]
+[ext_resource type="Shader" uid="uid://cfnwyva3u4qeb" path="res://mob/spawner/spawner_halo.gdshader" id="2_bk78j"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1cud"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6j4b"]
 render_priority = 0
-shader = ExtResource("2_l1cud")
-shader_parameter/screen_color = Color(0, 0.64705884, 0, 1)
-shader_parameter/pixel_size = 20.0
+shader = ExtResource("2_bk78j")
+shader_parameter/color = Color(0.14509805, 0.5764706, 0.40392157, 1)
 
-[node name="spawner_model" unique_id=1024251066 instance=ExtResource("1_t8boo")]
+[sub_resource type="Animation" id="Animation_l1cud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[node name="halo" parent="." index="0" unique_id=183053266]
-surface_material_override/0 = SubResource("ShaderMaterial_l1cud")
+[sub_resource type="Animation" id="Animation_bk78j"]
+resource_name = "rotation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvlhh"]
+_data = {
+&"RESET": SubResource("Animation_l1cud"),
+&"rotation": SubResource("Animation_bk78j")
+}
+
+[node name="spawner_model" unique_id=1588462891 instance=ExtResource("1_t8boo")]
+
+[node name="halo" parent="." index="0" unique_id=452357291]
+material_override = SubResource("ShaderMaterial_p6j4b")
+
+[node name="Top" parent="." index="2" unique_id=1574127434]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0.78395706, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="3" unique_id=1166405563]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=299902878]
+libraries/ = SubResource("AnimationLibrary_lvlhh")
+autoplay = &"rotation"
