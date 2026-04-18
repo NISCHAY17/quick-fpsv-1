@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://df6uaslbkiuu"]
 
 [ext_resource type="PackedScene" uid="uid://cpxdgjykq37tl" path="res://mob/bat/bat_model.glb" id="1_12yrx"]
+[ext_resource type="Script" uid="uid://utwsey64kx3b" path="res://mob/bat_model.gd" id="2_dmdl0"]
+[ext_resource type="Material" uid="uid://bq1gkm1jorroi" path="res://mob/bat/bat_material.tres" id="2_vofu1"]
 
 [sub_resource type="Animation" id="Animation_12yrx"]
 resource_name = "hurt"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -11,10 +14,22 @@ tracks/0/path = NodePath("Armature:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.099999994, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(1.18, 1.18, 1.18), Vector3(2.28, 2.28, 2.28)]
+"values": [Vector3(1, 1, 1), Vector3(1.167, 1.167, 1.167), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/bat:material_override:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9630324, 0.27270874, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vofu1"]
@@ -31,7 +46,7 @@ animation = &"custum/hurt"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xjlni"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vc25x"]
-graph_offset = Vector2(-255.25854, -68.417984)
+graph_offset = Vector2(-303.90436, -90.40998)
 nodes/output/position = Vector2(368, 64)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_xjlni")
 nodes/OneShot/position = Vector2(96, -112)
@@ -42,30 +57,32 @@ nodes/Animation/position = Vector2(-208, 192)
 node_connections = [&"output", 0, &"OneShot", &"OneShot", 0, &"Animation 2", &"OneShot", 1, &"Animation"]
 
 [node name="bat_model" unique_id=216404315 instance=ExtResource("1_12yrx")]
+script = ExtResource("2_dmdl0")
 
-[node name="Armature" parent="." index="0" unique_id=1491750862]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Armature" index="0" unique_id=1739603560]
-bones/0/position = Vector3(0, 0.014842625, 0)
-bones/1/rotation = Quaternion(0.083052985, 0.078973114, -0.6795391, 0.7246324)
-bones/2/rotation = Quaternion(0.1095177, 0.04022201, 0.34146267, 0.9326261)
-bones/3/rotation = Quaternion(0.16349043, 0.10828263, 0.32719728, 0.924385)
-bones/4/rotation = Quaternion(0.083052985, -0.078973114, 0.6795391, 0.7246324)
-bones/5/rotation = Quaternion(0.1095177, -0.04022201, -0.34146267, 0.9326261)
-bones/6/rotation = Quaternion(0.16349043, -0.10828263, -0.32719728, 0.924385)
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1491750862) index="0" unique_id=1739603560]
+bones/0/position = Vector3(0, -0.021561624, 0)
+bones/1/rotation = Quaternion(0.009347989, 0.1397577, -0.6280451, 0.76546705)
+bones/2/rotation = Quaternion(-0.16098934, -0.0515971, 0.3018111, 0.93825924)
+bones/3/rotation = Quaternion(-0.20253253, 0.0008981087, 0.22420423, 0.953264)
+bones/4/rotation = Quaternion(0.009347989, -0.1397577, 0.6280451, 0.76546705)
+bones/5/rotation = Quaternion(-0.16098934, 0.0515971, -0.3018111, 0.93825924)
+bones/6/rotation = Quaternion(-0.20253253, -0.0008981087, -0.22420423, 0.953264)
 bones/7/position = Vector3(0.1309921, -0.22739176, -0.087851465)
 bones/7/rotation = Quaternion(0.26196837, 0.08345512, 0.26575127, 0.9240044)
-bones/8/rotation = Quaternion(3.8014964e-08, 0.7014193, 0.7127488, 2.2752856e-08)
+bones/8/rotation = Quaternion(3.614758e-08, 0.56567276, 0.82462984, 2.280771e-08)
 bones/10/position = Vector3(-0.1309921, -0.22739176, -0.087851465)
 bones/10/rotation = Quaternion(0.26196837, -0.083455116, -0.26575127, 0.9240044)
-bones/11/rotation = Quaternion(2.1639705e-08, 0.70141935, 0.7127489, 3.5182342e-08)
+bones/11/rotation = Quaternion(2.4728353e-08, 0.56567276, 0.82462984, 4.1649937e-08)
+
+[node name="bat" parent="Armature/Skeleton3D" index="0" unique_id=420695521]
+material_override = ExtResource("2_vofu1")
 
 [node name="AnimationPlayer" parent="." index="1" unique_id=583662825]
 libraries/custum = SubResource("AnimationLibrary_vofu1")
 autoplay = &"Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=767176279]
+deterministic = false
 tree_root = SubResource("AnimationNodeBlendTree_vc25x")
 anim_player = NodePath("../AnimationPlayer")
 parameters/OneShot/active = false

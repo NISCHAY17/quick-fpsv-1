@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bq7a4lgadbagy"]
 
+[ext_resource type="Script" uid="uid://dm8kc6ddkceo4" path="res://mob/mob.gd" id="1_6jlfs"]
 [ext_resource type="PackedScene" uid="uid://df6uaslbkiuu" path="res://mob/bat_model.tscn" id="1_7b8ug"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6jlfs"]
@@ -7,8 +8,10 @@ radius = 0.3604382
 
 [node name="Mob" type="RigidBody3D" unique_id=1065548461]
 gravity_scale = 0.0
+script = ExtResource("1_6jlfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1790193045]
 shape = SubResource("SphereShape3D_6jlfs")
 
-[node name="bat_model" parent="." unique_id=1962743493 instance=ExtResource("1_7b8ug")]
+[node name="bat_model" parent="." unique_id=216404315 instance=ExtResource("1_7b8ug")]
+unique_name_in_owner = true
