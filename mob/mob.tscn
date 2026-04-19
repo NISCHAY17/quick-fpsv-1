@@ -36,6 +36,7 @@ shader_parameter/fresnel_offset = 1.0
 shader_parameter/global_alpha = 1.0
 
 [node name="Mob" type="RigidBody3D" unique_id=1065548461]
+collision_layer = 32
 gravity_scale = 0.0
 script = ExtResource("1_6jlfs")
 

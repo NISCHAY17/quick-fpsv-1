@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cilduqv4dhia5"]
 
-[ext_resource type="PackedScene" uid="uid://c2dyv3avngr72" path="res://player/projectile/projectile_model.glb" id="1_kixxk"]
 [ext_resource type="Script" uid="uid://51tj1yt3hww1" path="res://player/bullet_3d.gd" id="1_ofp5j"]
 [ext_resource type="PackedScene" uid="uid://mpurnyyvq7qw" path="res://player/projectile/projectile_3d.tscn" id="2_hgguu"]
 
@@ -9,15 +8,12 @@ radius = 0.3
 
 [node name="Bullet3D" type="Area3D" unique_id=580092822]
 top_level = true
+collision_mask = 33
 script = ExtResource("1_ofp5j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1148869809]
 transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 shape = SubResource("SphereShape3D_hgguu")
-
-[node name="projectile_model" parent="." unique_id=1507310 instance=ExtResource("1_kixxk")]
-transform = Transform3D(-3.278354e-08, 0, 0.75, 0, 0.75, 0, -0.75, 0, -3.278354e-08, 0, 0, 0)
-visible = false
 
 [node name="Projectile3D" parent="." unique_id=503865549 instance=ExtResource("2_hgguu")]
 transform = Transform3D(-3.409488e-08, 0, 0.78, 0, 0.78, 0, -0.78, 0, -3.409488e-08, 0, 0, 0)

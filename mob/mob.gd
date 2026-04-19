@@ -32,9 +32,11 @@ func take_damage():
 		var random_upword_force = Vector3.UP * randf_range(1.0, 6.7)
 		apply_central_force(direction * 10.0 * random_upword_force)
 		timer.start()
-		died.emit()
+	#	died.emit()
 		ko.play()
 		lock_rotation = false
 
 func _on_timer_timeout() -> void:
+	died.emit()
+
 	queue_free()
