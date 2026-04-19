@@ -45,4 +45,5 @@ func shoot_bullet():
 	new_bullwt.global_transform = %Marker3D.global_transform
 	
 	%Timer.start()
+	%AudioStreamPlayer3D.play()
 	#preload("res://player/bullet_3d.tscn")

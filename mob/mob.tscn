@@ -2,9 +2,38 @@
 
 [ext_resource type="Script" uid="uid://dm8kc6ddkceo4" path="res://mob/mob.gd" id="1_6jlfs"]
 [ext_resource type="PackedScene" uid="uid://df6uaslbkiuu" path="res://mob/bat_model.tscn" id="1_7b8ug"]
+[ext_resource type="PackedScene" uid="uid://cjk3frr43yesb" path="res://mob/smoke_puff/smoke_puff.tscn" id="3_jkfaf"]
+[ext_resource type="Shader" uid="uid://spi71y1qu06o" path="res://mob/smoke_puff/material/outer_smoke.gdshader" id="4_vcc1q"]
+[ext_resource type="Shader" uid="uid://0h8qjtcpk0mk" path="res://mob/smoke_puff/material/inner_smoke.gdshader" id="5_ub8vd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6jlfs"]
 radius = 0.3604382
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4wq73"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_vcc1q")
+shader_parameter/albedo = Color(0.937255, 0.698039, 1, 1)
+shader_parameter/progress = 0.0
+shader_parameter/smoothness = 0.2
+shader_parameter/ease = 1.0
+shader_parameter/base_scale = 0.0
+shader_parameter/deformation_scale = 0.0
+shader_parameter/texture_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bmme"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_ub8vd")
+shader_parameter/albedo = Color(1, 0.537255, 0.792157, 1)
+shader_parameter/progress = 0.0
+shader_parameter/smoothness = 0.01
+shader_parameter/ease = 2.0
+shader_parameter/base_scale = 0.0
+shader_parameter/deformation_scale = 0.19999999999708962
+shader_parameter/texture_offset = 0.0
+shader_parameter/fresnel_offset = 1.0
+shader_parameter/global_alpha = 1.0
 
 [node name="Mob" type="RigidBody3D" unique_id=1065548461]
 gravity_scale = 0.0
@@ -21,4 +50,24 @@ unique_name_in_owner = true
 wait_time = 3.67
 one_shot = true
 
+[node name="hurt" type="AudioStreamPlayer3D" parent="." unique_id=1725337948]
+unique_name_in_owner = true
+
+[node name="ko" type="AudioStreamPlayer3D" parent="." unique_id=2053946868]
+unique_name_in_owner = true
+
+[node name="smoke_puff" parent="." unique_id=825498846 instance=ExtResource("3_jkfaf")]
+visible = false
+
+[node name="OuterSmoke" parent="smoke_puff" index="0" unique_id=1348578092]
+material_override = SubResource("ShaderMaterial_4wq73")
+
+[node name="InnerSmoke" parent="smoke_puff" index="1" unique_id=1471773779]
+material_override = SubResource("ShaderMaterial_8bmme")
+
+[node name="Sound" parent="smoke_puff" index="3" unique_id=1862976266]
+stream = null
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="smoke_puff"]

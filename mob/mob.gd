@@ -5,6 +5,8 @@ var speed = randf_range(1.0, 1.7)
 signal died
 @onready var player = get_node("/root/Game/Player")
 @onready var timer: Timer = %Timer
+@onready var ko: AudioStreamPlayer3D = %ko
+@onready var hurt: AudioStreamPlayer3D = %hurt
 
 func _physics_process(delta):
 	var target = player.global_position
@@ -22,6 +24,7 @@ func take_damage():
 		return
 	bat_model.hurt()
 	health -= 1
+	hurt.play()
 	if health == 0:
 		set_physics_process(false)
 		gravity_scale = 1.0
@@ -30,6 +33,7 @@ func take_damage():
 		apply_central_force(direction * 10.0 * random_upword_force)
 		timer.start()
 		died.emit()
+		ko.play()
 		lock_rotation = false
 
 func _on_timer_timeout() -> void:
